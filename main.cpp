@@ -11,7 +11,7 @@ int main()
 	
 	// Introduce the player to the game
 	cout << "..........................\n";
-    cout << "Welcome to Bulls and Cows!\n";
+	cout << "Welcome to Bulls and Cows!\n";
 	cout << "..........................\n";
 	cout << "This is a fun word game / puzzle game!\n";
 	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
