@@ -5,16 +5,33 @@
 using namespace std;
 
 void PrintIntro();
-void GetGuess();
+void PlayGame();
+
+string GetGuess(std::string &Guess);
+
+void PrintGuess(std::string &Guess);
 
 int main() 
 {
+	string guess;
 	PrintIntro();
     
-	// This will get a guess from the player
-	GetGuess();
+	PlayGame();
 
 	return 0;
+}
+
+void PlayGame()
+{
+	constexpr int NUMBER_OF_TURNS = 5;
+
+	string Guess; 
+	// This will get a guess from the player
+	for (int i = 0; i < NUMBER_OF_TURNS; i++)
+	{
+		Guess = GetGuess(Guess);
+		PrintGuess(Guess);
+	}
 }
 
 
@@ -31,14 +48,16 @@ void PrintIntro() {
 	return;
 }
 
-void GetGuess() {
-
-	string Guess = "";
-
+string GetGuess(std::string &Guess)
+{
 	cout << "Enter your guess here: \n";
 	getline(cin, Guess);
-	cout << "I think you wrote: " << Guess << "\n";
-	cout << "Is that correct?\n";
+	return Guess;
+}
+
+void PrintGuess(std::string &Guess)
+{
+	cout << "Your guess: " << Guess << "\n";
 	cout << endl;
 	return;
 }
