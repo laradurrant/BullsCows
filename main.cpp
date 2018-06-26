@@ -1,7 +1,7 @@
 //Bulls and Cows
 #include <iostream>
 #include <string>
-
+#include "FBullCowGame.h"
 
 void PrintIntro();
 void PlayGame();
@@ -26,7 +26,8 @@ int main()
 void PlayGame()
 {
 	constexpr int NUMBER_OF_TURNS = 5;
-	
+	FBullCowGame BCGame;
+
 	std::string Guess; 
 	// This will get a guess from the player
 
