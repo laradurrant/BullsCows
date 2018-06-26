@@ -11,12 +11,18 @@ string GetGuess(std::string &Guess);
 
 void PrintGuess(std::string &Guess);
 
+bool AskToPlayAgain();
+
 int main() 
 {
 	string guess;
-	PrintIntro();
-    
-	PlayGame();
+
+	// Play the game but only while the player wants to
+	do
+	{
+		PrintIntro();
+		PlayGame();
+	} while (AskToPlayAgain());
 
 	return 0;
 }
@@ -24,14 +30,16 @@ int main()
 void PlayGame()
 {
 	constexpr int NUMBER_OF_TURNS = 5;
-
+	
 	string Guess; 
 	// This will get a guess from the player
+
 	for (int i = 0; i < NUMBER_OF_TURNS; i++)
 	{
 		Guess = GetGuess(Guess);
 		PrintGuess(Guess);
 	}
+
 }
 
 
@@ -60,4 +68,15 @@ void PrintGuess(std::string &Guess)
 	cout << "Your guess: " << Guess << "\n";
 	cout << endl;
 	return;
+}
+
+bool AskToPlayAgain()
+{
+	// Asks to play the game 
+	cout << "Would you like to play again? (y/n) \n";
+	string Response = "";
+	getline(cin, Response);
+	cout << endl;
+
+	return (Response[0] == 'y' || Response[0] == 'Y');
 }
