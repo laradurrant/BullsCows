@@ -2,6 +2,11 @@
 
 
 
+FBullCowGame::FBullCowGame()
+{
+	Reset();
+}
+
 int FBullCowGame::GetMaxTries() const
 {
 	return MyMaxTry;
@@ -34,4 +39,8 @@ bool FBullCowGame::CheckGuess(std::string)
 
 void FBullCowGame::Reset()
 {
+	constexpr int MY_MAX_TRIES = 8;
+	MyCurrenTry = 1;
+	MyMaxTry = MY_MAX_TRIES;
+	return;
 }

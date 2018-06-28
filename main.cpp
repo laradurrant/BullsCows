@@ -44,6 +44,7 @@ void PlayGame()
 
 void PrintIntro() {
 	// Sets the maximum word length
+	BCGame.Reset();
 	int MaxTries = BCGame.GetMaxTries();
 
 	// Introduce the player to the game

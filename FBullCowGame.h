@@ -4,6 +4,8 @@
 class FBullCowGame {
 
 public:
+	FBullCowGame(); // constructor
+
 	int GetMaxTries() const;
 	std::string GetHint() const;
 	int GetTurnNumber() const;
@@ -14,8 +16,9 @@ public:
 
 	//Focus on interface above
 private:
-	int MyCurrenTry = 1;
-	int MyMaxTry = 5;
+	// see constructor for initialization
+	int MyCurrenTry;
+	int MyMaxTry;
 	int TurnNumber;
 	
 };
