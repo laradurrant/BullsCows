@@ -1,8 +1,6 @@
 #include "FBullCowGame.h"
 
-void FBullCowGame::Reset()
-{
-}
+
 
 int FBullCowGame::GetMaxTries() const
 {
@@ -24,7 +22,7 @@ int FBullCowGame::GetCurrentTry() const
 	return MyCurrenTry;
 }
 
-bool FBullCowGame::IsGameWon()
+bool FBullCowGame::IsGameWon() const
 {
 	return false;
 }
@@ -32,4 +30,8 @@ bool FBullCowGame::IsGameWon()
 bool FBullCowGame::CheckGuess(std::string)
 {
 	return false;
+}
+
+void FBullCowGame::Reset()
+{
 }
