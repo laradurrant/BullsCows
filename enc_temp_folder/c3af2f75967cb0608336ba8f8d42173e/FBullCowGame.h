@@ -20,13 +20,13 @@ public:
 	int32 GetTurnNumber() const;
 	int32 GetCurrentTry() const;
 	bool IsGameWon() const;
-	bool CheckGuess(FString) const;
-	
+	bool CheckGuess(FString); // TODO: Return a rich value
+	void Reset(); // To Do: Return a rich value
+
 	//counts bulls and cows, and increases try # assuming valid guess 
 	FBullCowCount SubmitGuess(FString);
 
-	void Reset(); 
-
+	//Focus on interface above
 private:
 	// see constructor for initialization
 	int32 MyCurrenTry;

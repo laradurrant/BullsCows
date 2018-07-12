@@ -32,7 +32,7 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-bool FBullCowGame::CheckGuess(FString) const
+bool FBullCowGame::CheckGuess(FString)
 {
 	return false;
 }

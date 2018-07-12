@@ -62,9 +62,11 @@ void Printintro() {
 FString GetGuess(FString &Guess)
 {
 	int32 CurrentTry = BCGame.GetCurrentTry();
-	std::cout << "Try " << CurrentTry;
+	std::cout << "Try " << BCGame.GetCurrentTry();
 	std::cout << ". Enter your guess here: \n";
 	std::getline(std::cin, Guess);
+	FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+	std::cout << BullCowCount.Bulls << " " << BullCowCount.Cows << "\n";
 	return Guess;
 }
 
