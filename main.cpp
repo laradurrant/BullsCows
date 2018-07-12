@@ -30,13 +30,13 @@ int main()
 
 void PlayGame()
 {
-	constexpr int32 NUMBER_OF_TURNS = 5;
+	int32 NumberOfTurns = BCGame.GetMaxTries();
 	
 
 	FString Guess; 
 	// This will get a guess from the player
 
-	for (int32 i = 0; i < NUMBER_OF_TURNS; i++)
+	for (int32 i = 0; i < NumberOfTurns; i++)
 	{
 		Guess = GetGuess(Guess);
 		PrintGuess(Guess);
@@ -48,14 +48,14 @@ void PlayGame()
 void Printintro() {
 	// Sets the maximum word length
 	BCGame.Reset();
-	int32 MaxTries = BCGame.GetMaxTries();
+	int32 HiddenWordLength = BCGame.GetHiddenWordLength();
 
 	// introduce the player to the game
 	std::cout << "..........................\n";
 	std::cout << "Welcome to Bulls and Cows!\n";
 	std::cout << "..........................\n";
 	std::cout << "This is a fun word game / puzzle game!\n";
-	std::cout << "Can you guess the " << MaxTries << " letter isogram I'm thinking of?\n";
+	std::cout << "Can you guess the " << HiddenWordLength << " letter isogram I'm thinking of?\n";
 	return;
 }
 
@@ -65,8 +65,9 @@ FString GetGuess(FString &Guess)
 	std::cout << "Try " << BCGame.GetCurrentTry();
 	std::cout << ". Enter your guess here: \n";
 	std::getline(std::cin, Guess);
+
 	FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
-	std::cout << BullCowCount.Bulls << " " << BullCowCount.Cows << "\n";
+	std::cout << "Bulls: " << BullCowCount.Bulls << " Cows: " << BullCowCount.Cows << "\n";
 	return Guess;
 }
 

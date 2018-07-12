@@ -27,19 +27,24 @@ int32 FBullCowGame::GetCurrentTry() const
 	return MyCurrenTry;
 }
 
+int32 FBullCowGame::GetHiddenWordLength() const
+{
+	return MyHiddenWord.length();
+}
+
 bool FBullCowGame::IsGameWon() const
 {
 	return false;
 }
 
-bool FBullCowGame::CheckGuess(FString) const
+bool FBullCowGame::CheckGuessValidity(FString) const
 {
 	return false;
 }
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 8;
+	constexpr int32 MAX_TRIES = 5;
 	const FString HIDDEN_WORD = "plain";
 
 	MyCurrenTry = 1;
@@ -60,6 +65,9 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 		// compare letters against the hidden word
 
 	int32 HiddenWordLength = MyHiddenWord.length();
+
+
+
 	for (int32 i = 0; i < HiddenWordLength; i++)
 	{
 		for (int32 j = 0; j < HiddenWordLength; j++)

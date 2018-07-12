@@ -10,6 +10,11 @@ struct FBullCowCount {
 	int32 Bulls = 0;
 };
 
+enum EWordStatus
+{
+
+};
+
 class FBullCowGame {
 
 public:
@@ -19,8 +24,10 @@ public:
 	FString GetHint() const;
 	int32 GetTurnNumber() const;
 	int32 GetCurrentTry() const;
+	int32 GetHiddenWordLength() const;
+
 	bool IsGameWon() const;
-	bool CheckGuess(FString) const;
+	bool CheckGuessValidity(FString) const;
 	
 	//counts bulls and cows, and increases try # assuming valid guess 
 	FBullCowCount SubmitGuess(FString);
