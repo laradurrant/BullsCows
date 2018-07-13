@@ -32,14 +32,29 @@ void PlayGame()
 {
 	int32 NumberOfTurns = BCGame.GetMaxTries();
 	
-
 	FString Guess; 
-	// This will get a guess from the player
 
+	// This will get a guess from the player
 	for (int32 i = 0; i < NumberOfTurns; i++)
 	{
 		Guess = GetGuess(Guess);
-		PrintGuess(Guess);
+
+		EGuessStatus guess_status;
+		guess_status = BCGame.CheckGuessValidity(Guess);
+
+		if (guess_status == EGuessStatus::OK)
+		{
+			FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+			std::cout << "Bulls: " << BullCowCount.Bulls << " Cows: " << BullCowCount.Cows << "\n";
+
+			PrintGuess(Guess);
+		}
+		else
+		{
+			std::cout << "Something went wrong!" << std::endl;
+		}
+
+		
 	}
 
 }
@@ -66,8 +81,6 @@ FString GetGuess(FString &Guess)
 	std::cout << ". Enter your guess here: \n";
 	std::getline(std::cin, Guess);
 
-	FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
-	std::cout << "Bulls: " << BullCowCount.Bulls << " Cows: " << BullCowCount.Cows << "\n";
 	return Guess;
 }
 
