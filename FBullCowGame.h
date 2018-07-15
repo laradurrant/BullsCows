@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-using FString = std::string;
+using FText = std::string;
 using int32 = int;
 
 //Initializes all values to zero
@@ -12,6 +12,7 @@ struct FBullCowCount {
 
 enum class EGuessStatus
 {
+	Invalid_Status,
 	OK,
 	Not_Isogram,
 	Word_Length,
@@ -24,16 +25,16 @@ public:
 	FBullCowGame(); // constructor
 
 	int32 GetMaxTries() const;
-	FString GetHint() const;
+	FText GetHint() const;
 	int32 GetTurnNumber() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 
 	bool IsGameWon() const;
-	EGuessStatus CheckGuessValidity(FString) const;
+	EGuessStatus CheckGuessValidity(FText) const;
 	
 	//counts bulls and cows, and increases try # assuming valid guess 
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FText);
 
 	void Reset(); 
 
@@ -43,6 +44,6 @@ private:
 	int32 MyMaxTry;
 	int32 TurnNumber;
 
-	FString MyHiddenWord;
+	FText MyHiddenWord;
 	
 };

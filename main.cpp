@@ -3,20 +3,21 @@
 #include <string>
 #include "FBullCowGame.h"
 
-using FString = std::string; 
+using FText = std::string; 
 using int32 = int;
 
 void Printintro();
 void PlayGame();
-FString GetGuess(FString &Guess);
-void PrintGuess(FString &Guess);
+FText GetValidGuess();
+void PrintGuess(FText &Guess);
 bool AskToPlayAgain();
+
 
 FBullCowGame BCGame;
 
 int main() 
 {
-	FString guess;
+	FText guess;
 
 	// Play the game but only while the player wants to
 	do
@@ -30,34 +31,60 @@ int main()
 
 void PlayGame()
 {
+	BCGame.Reset();
 	int32 NumberOfTurns = BCGame.GetMaxTries();
 	
-	FString Guess; 
+
 
 	// This will get a guess from the player
 	for (int32 i = 0; i < NumberOfTurns; i++)
 	{
-		Guess = GetGuess(Guess);
+		FText Guess = GetValidGuess();
 
-		EGuessStatus guess_status;
-		guess_status = BCGame.CheckGuessValidity(Guess);
-
-		if (guess_status == EGuessStatus::OK)
-		{
-			FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
-			std::cout << "Bulls: " << BullCowCount.Bulls << " Cows: " << BullCowCount.Cows << "\n";
-
-			PrintGuess(Guess);
-		}
-		else
-		{
-			std::cout << "Something went wrong!" << std::endl;
-		}
-
-		
+		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
+		std::cout << "Bulls: " << BullCowCount.Bulls << " Cows: " << BullCowCount.Cows << "\n";
 	}
 
 }
+
+
+
+// loops until we get a valid guess
+FText GetValidGuess()
+{
+	FText Guess = "";
+	EGuessStatus Status = EGuessStatus::Invalid_Status;
+
+	do
+	{
+
+	int32 CurrentTry = BCGame.GetCurrentTry();
+	std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: \n";
+	
+	std::getline(std::cin, Guess);
+
+		Status = BCGame.CheckGuessValidity(Guess);
+
+		switch (Status)
+		{
+			case EGuessStatus::Word_Length:
+				std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n";
+				break;
+			case EGuessStatus::Not_Isogram:
+				std::cout << "Please enter a word without repeating letters.\n";
+				break;
+			case EGuessStatus::Not_Lowercase:
+				std::cout << "Please make sure your word uses lowercase letter.\n";
+				break;
+			default:
+				break;
+		}
+
+	} while (Status != EGuessStatus::OK); // keep looping until we get no errors
+	
+	return Guess;
+}
+
 
 
 void Printintro() {
@@ -74,17 +101,8 @@ void Printintro() {
 	return;
 }
 
-FString GetGuess(FString &Guess)
-{
-	int32 CurrentTry = BCGame.GetCurrentTry();
-	std::cout << "Try " << BCGame.GetCurrentTry();
-	std::cout << ". Enter your guess here: \n";
-	std::getline(std::cin, Guess);
 
-	return Guess;
-}
-
-void PrintGuess(FString &Guess)
+void PrintGuess(FText &Guess)
 {
 	std::cout << "Your guess: " << Guess << "\n";
 	std::cout << std::endl;
@@ -95,7 +113,7 @@ bool AskToPlayAgain()
 {
 	// Asks to play the game 
 	std::cout << "Would you like to play again? (y/n) \n";
-	FString Response = "";
+	FText Response = "";
 	std::getline(std::cin, Response);
 	std::cout << std::endl;
 

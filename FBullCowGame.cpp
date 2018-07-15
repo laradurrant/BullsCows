@@ -12,9 +12,9 @@ int32 FBullCowGame::GetMaxTries() const
 	return MyMaxTry;
 }
 
-FString FBullCowGame::GetHint() const
+FText FBullCowGame::GetHint() const
 {
-	return FString();
+	return FText();
 }
 
 int32 FBullCowGame::GetTurnNumber() const
@@ -37,7 +37,7 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-EGuessStatus FBullCowGame::CheckGuessValidity(FString guess) const
+EGuessStatus FBullCowGame::CheckGuessValidity(FText guess) const
 {
 	//TODO: Implement error checking here
 	if (false)
@@ -63,7 +63,7 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString guess) const
 void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 5;
-	const FString HIDDEN_WORD = "plain";
+	const FText HIDDEN_WORD = "plain";
 
 	MyCurrenTry = 1;
 	MyMaxTry = MAX_TRIES;
@@ -73,7 +73,7 @@ void FBullCowGame::Reset()
 }
 
 // Receives a valid guess and increments turn, and returns count
-FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
+FBullCowCount FBullCowGame::SubmitValidGuess(FText Guess)
 {
 	//Increment turn number
 	MyCurrenTry++;
@@ -83,12 +83,11 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 		// compare letters against the hidden word
 
 	int32 HiddenWordLength = MyHiddenWord.length();
-
-
+	int32 GuessLength = Guess.length();
 
 	for (int32 i = 0; i < HiddenWordLength; i++)
 	{
-		for (int32 j = 0; j < HiddenWordLength; j++)
+		for (int32 j = 0; j < GuessLength; j++)
 		{
 			if (Guess[i] == MyHiddenWord[j])
 			{
