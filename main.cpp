@@ -37,12 +37,25 @@ void PlayGame()
 
 
 	// This will get a guess from the player
-	for (int32 i = 0; i < NumberOfTurns; i++)
+	while(BCGame.GetCurrentTry() < BCGame.GetMaxTries() && !BCGame.IsGameWon())
 	{
 		FText Guess = GetValidGuess();
 
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 		std::cout << "Bulls: " << BullCowCount.Bulls << " Cows: " << BullCowCount.Cows << "\n";
+	}
+
+	if (BCGame.IsGameWon())
+	{
+		std::cout << "..........................\n";
+		std::cout << "YOU WON! Congratulations!\n";
+		std::cout << "..........................\n";
+	}
+	else if (BCGame.GetCurrentTry() >= BCGame.GetMaxTries() && !BCGame.IsGameWon())
+	{
+		std::cout << "..........................\n";
+		std::cout << "You lose... Better luck next time!\n";
+		std::cout << "..........................\n";
 	}
 
 }

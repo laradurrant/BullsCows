@@ -43,6 +43,7 @@ private:
 	int32 MyCurrenTry;
 	int32 MyMaxTry;
 	int32 TurnNumber;
+	bool bGameWon;
 
 	FText MyHiddenWord;
 	
