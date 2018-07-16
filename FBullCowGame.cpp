@@ -1,5 +1,6 @@
 #include "FBullCowGame.h"
-
+#include <map>
+#define TMap std::map
 
 
 FBullCowGame::FBullCowGame()
@@ -37,10 +38,24 @@ bool FBullCowGame::IsGameWon() const
 	return bGameWon;
 }
 
+bool FBullCowGame::IsIsogram(FText guess) const
+{
+	// cycle through the letters of the guess
+		// "load up" the map with the letters of the guess
+		// setting new letters from false to true
+	
+			// if there is a duplicate letter
+			// aka if one of the letters of the map is not false
+			// then return false (not an isogram)
+		
+	// otherwise return true
+	return true;
+}
+
 EGuessStatus FBullCowGame::CheckGuessValidity(FText guess) const
 {
 	//TODO: Implement error checking here
-	if (false)
+	if (!IsIsogram(guess))
 	{
 		return EGuessStatus::Not_Isogram;
 	}
@@ -76,9 +91,6 @@ void FBullCowGame::Reset()
 // Receives a valid guess and increments turn, and returns count
 FBullCowCount FBullCowGame::SubmitValidGuess(FText Guess)
 {
-
-
-
 	
 	//Increment turn number
 	MyCurrenTry++;

@@ -31,6 +31,7 @@ public:
 	int32 GetHiddenWordLength() const;
 
 	bool IsGameWon() const;
+
 	EGuessStatus CheckGuessValidity(FText) const;
 	
 	//counts bulls and cows, and increases try # assuming valid guess 
@@ -47,4 +48,5 @@ private:
 
 	FText MyHiddenWord;
 	
+	bool IsIsogram(FText) const;
 };
