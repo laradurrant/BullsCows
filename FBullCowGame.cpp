@@ -38,32 +38,54 @@ bool FBullCowGame::IsGameWon() const
 	return bGameWon;
 }
 
-bool FBullCowGame::IsIsogram(FText guess) const
+bool FBullCowGame::IsIsogram(FText Word) const
 {
-	// cycle through the letters of the guess
-		// "load up" the map with the letters of the guess
-		// setting new letters from false to true
-	
-			// if there is a duplicate letter
-			// aka if one of the letters of the map is not false
-			// then return false (not an isogram)
+	// treat 0 and 1 letter words as isograms
+	if (Word.length() <= 1)
+	{
+		return true; 
+	}
+
+	TMap<char, bool> LetterSeen; 	// set up our map 
+	for (auto Letter : Word)        // cycle through the letters of the guess
+	{
+		Letter = tolower(Letter);
+		 
+		if (LetterSeen[Letter])  	// if there is a duplicate letter
+									// aka if one of the letters of the map is not false
+									// then return false (not an isogram)
+		{
+			return false;
+		}
+		else
+		{
+			LetterSeen[Letter] = true; 		// "load up" the map with the letters of the guess
+											// setting new letters from false to true	
+		}
 		
-	// otherwise return true
+	}
+
 	return true;
 }
 
-EGuessStatus FBullCowGame::CheckGuessValidity(FText guess) const
+bool FBullCowGame::IsLowercase(FText Word) const
+{
+
+	return false;
+}
+
+EGuessStatus FBullCowGame::CheckGuessValidity(FText Guess) const
 {
 	//TODO: Implement error checking here
-	if (!IsIsogram(guess))
+	if (!IsIsogram(Guess))
 	{
 		return EGuessStatus::Not_Isogram;
 	}
-	else if (false)
+	else if (!IsLowercase(Guess))
 	{
 		return EGuessStatus::Not_Lowercase;
 	}
-	else if (guess.length() != GetHiddenWordLength())
+	else if (Guess.length() != GetHiddenWordLength())
 	{
 		return EGuessStatus::Word_Length;
 	}

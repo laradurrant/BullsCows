@@ -49,4 +49,5 @@ private:
 	FText MyHiddenWord;
 	
 	bool IsIsogram(FText) const;
+	bool IsLowercase(FText) const;
 };
