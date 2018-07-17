@@ -10,7 +10,8 @@ FBullCowGame::FBullCowGame()
 
 int32 FBullCowGame::GetMaxTries() const
 {
-	return MyMaxTry;
+	TMap<int32, int32> WordLengthMaxTries{ {3,4}, {4,7}, {5,10}, {6,15}, {7, 20} };
+	return WordLengthMaxTries[MyHiddenWord.length()];
 }
 
 FText FBullCowGame::GetHint() const
@@ -70,8 +71,20 @@ bool FBullCowGame::IsIsogram(FText Word) const
 
 bool FBullCowGame::IsLowercase(FText Word) const
 {
+	if (Word.length() <= 1)
+	{
+		return true;
+	}
 
-	return false;
+	for (auto Letter : Word)        // cycle through the letters of the guess
+	{
+		if (!islower(Letter))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FText Guess) const
@@ -99,12 +112,11 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FText Guess) const
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 5;
-	const FText HIDDEN_WORD = "plain";
-
+	const FText HIDDEN_WORD = "planet";
+ 
 	bGameWon = false;
 	MyCurrenTry = 1;
-	MyMaxTry = MAX_TRIES;
+	MyMaxTry = GetMaxTries();
 	MyHiddenWord = HIDDEN_WORD;
 
 	return;
